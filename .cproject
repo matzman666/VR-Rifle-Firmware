@@ -22,6 +22,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/libraries/USBHost}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/libraries/USBHost/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.369681841" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -30,6 +32,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/libraries/USBHost}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/libraries/USBHost/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.1762153322" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -38,6 +42,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/libraries/USBHost}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Firmware/libraries/USBHost/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.1421744269" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>

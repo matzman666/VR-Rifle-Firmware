@@ -7,7 +7,7 @@ This is the source code of the firmware powering my DIY VR-rifle (the blueprints
 
 I wrote it for use with an Arduino Due, I don't know if it works with other Arduino boards.
 
-Uses a [modified Arduino USB host library](https://github.com/matzman666/USBHost) (already included) with support for the Vive tracker.
+Requires a [modified Arduino USB host library](https://github.com/matzman666/USBHost) with support for the Vive tracker.
 
 ## Features
 

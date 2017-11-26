@@ -41,5 +41,10 @@
 			<type>2</type>
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/arduino/hardware/sam/1.6.11/variants/arduino_due_x</locationURI>
 		</link>
+		<link>
+			<name>libraries/USBHost</name>
+			<type>2</type>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/libraries/USBHost/1.0.6</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

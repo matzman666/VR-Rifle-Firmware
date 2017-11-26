@@ -5,6 +5,7 @@
 #include "joystick.h"
 #include "trigger.h"
 #include "button.h"
+#include "hapticfeedback.h"
 #include <ViveTrackerController.h>
 
 // Init USB
@@ -18,11 +19,14 @@ void setup() {
 	// Set adc converter resolution to 12 bit
 	analogReadResolution(12);
 
-	// setup joystick, trigger, buttons and status led
-	pinMode(LED_BUILTIN, OUTPUT);
+	// setup joystick, trigger, buttons, haptic feedback and status leds
+	pinMode(STATUS_LED0_PIN, OUTPUT);
+	pinMode(STATUS_LED1_PIN, OUTPUT);
 	joystick_init();
 	trigger_init();
 	button_init();
+	hapticFeedback.init(&tracker);
+	hapticFeedback.enable(true);
 
 #if DEBUG_OUTPUT == 1
 	Serial.write("VR Rifle Firmware v0.1-alpha1 successfully loaded.\n");
@@ -30,9 +34,12 @@ void setup() {
 }
 
 
-bool statusLedState = false;
-uint32_t statusLedInterval = STATUSLED_UNCALIBRATED_INTERVAL;
-uint32_t statusLedNextChange = 0;
+bool statusLed0State = false;
+uint32_t status0LedInterval = STATUSLED_FASTBLINKIN_INTERVAL;
+uint32_t status0LedNextChange = 0;
+bool statusLed1State = false;
+uint32_t status1LedInterval = STATUSLED_FASTBLINKIN_INTERVAL;
+uint32_t status1LedNextChange = 0;
 
 bool _lastUSBConnectState = false;
 
@@ -42,20 +49,26 @@ void loop() {
 	// Update USB connection state
 	tracker.Task();
 
-	// Blink the status led
-	// It has three distinct states:
-	// 1) joystick/trigger are not calibrated (default: 3 flashes per second)
-	// 1) USB is not connected (default: 10 flashes per second)
-	// 1) Everything is ok (default: 1 flash per second)
-	if (timestamp >= statusLedNextChange) {
-		statusLedState = !statusLedState;
-		digitalWrite(LED_BUILTIN, statusLedState ? HIGH : LOW);
+	// Blink the status leds
+	// Status led 0 represents calibration state (fast blinking ... calibration not finished, slow blinking ... everything ok)
+	if (timestamp >= status0LedNextChange) {
+		statusLed0State = !statusLed0State;
+		digitalWrite(STATUS_LED0_PIN, statusLed0State ? HIGH : LOW);
 		if (!joystick0.isCalibrated() || !trigger0.isCalibrated()) {
-			statusLedNextChange = timestamp + STATUSLED_UNCALIBRATED_INTERVAL;
-		} else if (!_lastUSBConnectState) {
-			statusLedNextChange = timestamp + STATUSLED_DISCONNECTED_INTERVAL;
+			status0LedNextChange = timestamp + STATUSLED_FASTBLINKIN_INTERVAL;
 		} else {
-			statusLedNextChange = timestamp + STATUSLED_CALIBRATED_INTERVAL;
+			status0LedNextChange = timestamp + STATUSLED_SLOWBLINKING_INTERVAL;
+		}
+	}
+	// Status led 1 represents USB connection state (fast blinking ... connected, always on ... connected)
+	if (tracker.isConnected()) {
+		statusLed1State = true;
+		digitalWrite(STATUS_LED1_PIN, HIGH);
+	} else {
+		if (timestamp >= status1LedNextChange) {
+			statusLed1State = !statusLed1State;
+			digitalWrite(STATUS_LED1_PIN, statusLed1State ? HIGH : LOW);
+			status1LedNextChange = timestamp + STATUSLED_FASTBLINKIN_INTERVAL;
 		}
 	}
 

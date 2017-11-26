@@ -64,8 +64,8 @@ void Trigger::update(unsigned long timestamp) {
 #endif
 			}
 		} else {
-			if (_tRawValue > _tRawMaxValue) {
-				_tRawValue = _tRawMaxValue;
+			if (raw > _tRawMaxValue) {
+				raw = _tRawMaxValue;
 			}
 			_tRawValue = map(raw, _tRawZeroValue, _tRawMaxValue, 0, 255);
 		}
